@@ -1,0 +1,3 @@
+-- Đặt giá trị bắt đầu cho Sequence của bảng pro_baller
+ALTER TABLE pro_baller AUTO_INCREMENT = 8;
+-- Lần tới khi INSERT, cầu thủ mới sẽ có ID là 1000, 1001...
