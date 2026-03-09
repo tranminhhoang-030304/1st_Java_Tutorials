@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <database>MySQL</database>
+    <port>3306</port>
+    <host>localhost</host>
+    <user>root</user>
+    <password>123456</password>
+</config>

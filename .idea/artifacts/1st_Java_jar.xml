@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="1st Java:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/1st_Java_jar</output-path>
+    <root id="archive" name="1st Java.jar">
+      <element id="module-output" name="1st Java" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/mysql-connector-j-8.3.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/protobuf-java-3.25.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

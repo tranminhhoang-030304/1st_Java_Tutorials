@@ -1,5 +1,7 @@
+package javacorebasic.chapter1;
+
 import java.util.Arrays;
-public class ArrayAlgorithms {
+public class chapter1d_ArrayAlgorithms {
     public static void main(String[] args) {
         int[] numbers = {5, 2, 9, 1, 6};
         System.out.println("Mảng ban đầu: " + Arrays.toString(numbers));

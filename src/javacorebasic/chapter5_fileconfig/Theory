@@ -1,0 +1,6 @@
+Tại sao lại cần File Config (File cấu hình)?
+=> Vì ở bài kết nối Database vừa rồi, đang "hardcode" (gõ cứng) mật khẩu 123456 và user root trực tiếp vào trong file .java.
+Nhưng khi đi làm thực tế:
++) Không được phép để lộ mật khẩu database lên mã nguồn (bảo mật).
++) Khi mang code từ máy local (môi trường Dev) sang máy chủ thật (môi trường Production), thông tin database sẽ thay đổi. Nếu gõ cứng trong code, bạn sẽ phải đi tìm từng file Java để sửa, rồi build lại toàn bộ hệ thống rất mất công.
+=> Giải pháp: Rút toàn bộ những thông tin "hay thay đổi" đó ra một file văn bản riêng biệt gọi là File Config (file cấu hình). Code Java chỉ việc đọc cái file đó lên để lấy thông tin.

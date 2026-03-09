@@ -1,11 +1,13 @@
+package javacorebasic.chapter1;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileInputOutput {
+public class chapter1e_FileInputOutput {
     public static void main(String[] args){
-        String fileName = "data.txt";
+        String fileName = "javacorebasic/chapter4_DBMySQL/data.txt";
 
         //1. Ghi file (Output Stream)
         try (FileWriter writer = new FileWriter(fileName)){ // Cú pháp try-with-resources (có dấu ngoặc tròn sau try) giúp tự động đóng file sau khi dùng xong

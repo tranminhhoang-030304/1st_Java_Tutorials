@@ -1,4 +1,6 @@
-public class BasicLogic {
+package javacorebasic.chapter1;
+
+public class chapter1bc_BasicLogic {
     public static void main(String[] args){
         //1. Khai báo kiểu dữ liệu
         int age = 22;
