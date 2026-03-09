@@ -28,3 +28,8 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+# Bỏ qua các file cấu hình chứa thông tin mật
+**/config.properties
+**/database.properties
+*.env
