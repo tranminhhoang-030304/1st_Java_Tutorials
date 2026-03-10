@@ -1,0 +1,27 @@
+1. Khái niệm Socket: "Cánh cửa giao tiếp"
+=> Khi hai máy tính muốn nói chuyện với nhau qua mạng, chúng cần phải biết 2 thứ:
++) Địa chỉ IP: Giống như "Địa chỉ tòa nhà" của máy tính đó (Ví dụ: 192.168.1.10 hoặc localhost).
++) Cổng (Port): Giống như "Số phòng" trong tòa nhà đó (Ví dụ: Cổng 80 cho Web, cổng 3306 cho MySQL).
+=> Socket chính là sự kết hợp giữa IP + Port. Nó đóng vai trò như một "cánh cửa" (Endpoint). Máy A mở một nửa cánh cửa, máy B mở nửa còn lại, hai bên cắm chung một đường ống vào đó là có thể truyền dữ liệu cho nhau.
+=> Có 2 chuẩn giao tiếp chính qua cánh cửa này là TCP và UDP.
+
+2. TCP (Transmission Control Protocol) - Cơ chế "Gọi điện thoại"
++) TCP là giao thức hướng kết nối (Connection-oriented).
++) Cơ chế hoạt động: Giống gọi điện thoại. Khi đã kết nối thành công, mới bắt đầu nói chuyện. Nói câu nào bên kia nghe rõ câu đó, theo đúng thứ tự. Nếu đầu dây bên kia ồn không nghe rõ, sẽ yêu cầu nói lại.
++) Đặc điểm: Cực kỳ an toàn, đảm bảo dữ liệu đến nơi 100% không bị mất mát hay sai thứ tự. Đổi lại, nó tốn thời gian thiết lập kết nối và chạy chậm hơn một chút.
++) Ứng dụng: Lướt Web (HTTP), Gửi Email, Truyền File, Database
+
+3. UDP (User Datagram Protocol) - Cơ chế "Phát loa phường"
++) UDP là giao thức phi kết nối (Connectionless).
++) Cơ chế hoạt động: Giống như bắc loa phường đọc thông báo, hoặc ném thư tay. Cứ gói dữ liệu lại (DatagramPacket) rồi ném về phía địa chỉ máy nhận. KHÔNG CẦN biết máy nhận có đang bật hay không, cũng không quan tâm họ có nhận được đủ hay không.
++) Đặc điểm: Siêu tốc, độ trễ cực thấp vì không tốn công bắt tay chào hỏi hay kiểm tra lỗi. Đổi lại, dữ liệu có thể bị thất lạc giữa đường (rớt gói tin) hoặc đến sai thứ tự.
++) Ứng dụng: Livestream (rớt vài khung hình không sao), Gọi Video (Zalo/Messenger), Game Online bắn súng (cần phản hồi ngay lập tức, đạn lạc tí không sao).
+
+4. So sánh TCP và UDP
+        Tiêu chí         ||         TCP                   ||            UDP
+ 1. Thiết lập kết nối    ||           Có                  ||           Không
+ 2.     Độ tin cậy       ||     Không mất dữ liệu         ||         Có thể mất
+ 3.    Thứ tự dữ liệu    ||       Đúng thứ tự             ||          Đến trước nhận trước
+ 4.     Tốc độ           ||        Châm (do cần check)    ||           Nhanh
+ 5.   Cách truyền data   ||      Theo dạng dòng (Stream)  ||            Theo dạng từng gói (Datagram)
+ 6.   Ví dụ thực tế      ||        Web, DB, File          ||           Game online, Livestrea, Video Call
