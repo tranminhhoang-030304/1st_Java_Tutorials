@@ -1,0 +1,17 @@
+1. Buffered Streams (Bộ đệm)
+=> Tạo ra 1 bộ nhớ đệm trong RAM (thường là 8KB) thay vì gọi ổ cứng liên tục, hệ thống sẽ đọc/ghi data vào RAM, xử lý rồi mới đẩy về ổ cứng
+=> Đại diện: BufferedInputStream, BufferedOutputStream (file nhị phân và ảnh), BufferedReader, BufferedWriter (file text)
+=> Ưu điểm: Tăng tốc độ đọc/ghi file lên hàng chục, trăm lần so với I/O thường, dễ dùng (chỉ cần bọc bên ngoài các Stream cơ bản)
+=> Nhược điểm: Tốn thêm 1 chút RAM, bắt buộc gọi lệnh .flush() hoặc đóng luồng .close() sau khi ghi xong, nếu không sẽ kẹt ở RAM
+
+2. Object Serialization (Đọc/Ghi nguyên 1 Object)
+=> Không cần tách ra thành các biến riêng lẻ rồi ghi từng dòng xuống DB, có thể đóng băng nguyên 1 Object và đẩy xuống luôn
+=> Đại diện: ObjectOutputStream, ObjectInputStream
+=> Yêu cầu: Class bắt buộc phải implements Serializable
+=> Ưu điểm: Tiện cho việc lưu trạng thái ứng dụng (phiên đăng nhập, màn chơi dở,...), không cần bóc tách dữ liệu thủ công
+=> Nhược điểm: Sinh ra file nhị phân (chỉ Java đọc được), khó tương thích khi thay đổi cấu trúc Class về sau
+
+3. NIO (New I/O)
+=> Vừa đọc vừa ghi đồng thời, data không chạy trực tiếp vào biến và chuyển qua 1 khối "buffer" (ByteBuffer ...) xử lý
+=> Quản lý metadata dễ dàng, siêu ngắn gọn với các file nhỏ
+=> Cú pháp phức tạp so với Stream

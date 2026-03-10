@@ -1,0 +1,46 @@
+1. Khái niệm về Thread
++) Thread (Luồng): Là đơn vị thực thi nhỏ nhất trong một chương trình. Khi chạy một ứng dụng Java, hệ điều hành sẽ tạo ra một luồng chính (Main Thread) để chạy từ main().
++) Multithreading (Đa luồng): Là kỹ thuật cho phép một chương trình tạo ra nhiều luồng chạy song song cùng lúc (đồng thời).
++) Mục đích: Tận dụng tối đa sức mạnh của CPU nhiều nhân, giúp chương trình không bị đơ (ví dụ: một luồng cập nhật giao diện, một luồng tải file ngầm). Các luồng trong cùng một tiến trình (Process) sẽ dùng chung bộ nhớ.
+
+2. Hai cách khởi tạo Thread và Ưu/Nhược điểm
++) Cách 1: Kế thừa lớp Thread (extends Thread)
+-) Ưu điểm: Cú pháp ngắn gọn, có thể gọi trực tiếp các hàm của Thread (như getName(), sleep()) ngay bên trong class.
+-) Nhược điểm (Rất lớn): Vì Java không hỗ trợ đa kế thừa, một khi class của đã extends Thread thì nó vĩnh viễn không thể kế thừa bất kỳ class nào khác. Điều này làm giảm tính linh hoạt của hệ thống.
++) Cách 2: Triển khai giao diện Runnable (implements Runnable) - 🌟 Khuyên dùng
+-) Ưu điểm: Tách bạch rõ ràng giữa "Công việc cần làm" (Runnable) và "Người thực hiện" (Thread). Class vẫn có thể tự do extends class khác. Đặc biệt tốt khi nhiều luồng cần chia sẻ chung một đối tượng công việc.
+-) Nhược điểm: Mất thêm một dòng code để nhét đối tượng Runnable vào trong đối tượng Thread (Thread t = new Thread(runnableObj);).
++) Cách 3: Viết tắt bằng Lambda Expression (Vẫn là Runnable) => Có thể gộp luôn vào lúc 'new thread' bằng cú pháp mũi tên '->'
+                Thread t4 = new Thread(() -> {
+                    System.out.println("⚡ [Lambda Thread] Chạy siêu nhanh gọn không cần tạo class mới!");
+                });
+                t4.start();
++) Cách 4: Sử dụng 'Callable' và 'Future'
+=> Cả Thread và Runnable đều có một nhược điểm: Hàm run() có kiểu trả về là void. Tức là luồng chạy xong thì thôi, không trả về kết quả gì cả (ví dụ luồng tính tổng 2 số chạy xong không biết trả kết quả tổng cho ai).
+-) Callable sinh ra để giải quyết việc này: Nó giống hệt Runnable nhưng có thể trả về một giá trị và ném ra lỗi (Exception).
+-) Callable thường được dùng chung với Thread Pool => Sang phần 4 (Muilti Thread)
+
+3. Thread Priority (Độ ưu tiên)
++) Thang điểm: Từ 1 (MIN_PRIORITY) đến 10 (MAX_PRIORITY). Mặc định khi sinh ra là 5 (NORM_PRIORITY).
++) Bản chất: Đây chỉ là một lời gợi ý dành cho Bộ lập lịch của Hệ điều hành (OS Scheduler).
++) Lưu ý sống còn: Hệ điều hành có quyền quyết định cuối cùng. Không hiếm trường hợp luồng ưu tiên thấp (1) lại được chạy xong trước luồng ưu tiên cao (10). Do đó, tuyệt đối không dùng Priority để xử lý logic yêu cầu tính tuần tự nghiêm ngặt.
+
+4. Vòng đời và các trạng thái của Thread
+=> Một luồng từ khi sinh ra đến lúc kết thúc vòng đời sẽ đi qua 5 trạng thái chính:
++) NEW: Vừa được new ra, chưa gọi lệnh start().
++) RUNNABLE: Đã gọi start(). Lúc này luồng có thể đang chạy thực sự trên CPU, hoặc đang đứng xếp hàng chờ CPU rảnh rỗi để được chạy.
++) WAITING / TIMED_WAITING: Luồng tạm nhường CPU và đi ngủ. Có thể ngủ vô thời hạn (gọi wait()) hoặc ngủ có hẹn giờ (gọi Thread.sleep(1000)).
++) BLOCKED: Luồng bị chặn lại ở cửa vì cố gắng đi vào một khu vực tài nguyên (khối lệnh synchronized) đang bị một luồng khác chiếm giữ khóa (Lock).
++) TERMINATED: Hàm run() đã chạy xong hoặc văng lỗi. Khi đã ở trạng thái này, luồng được coi là "đã chết" và không thể gọi start() lại được nữa.
+
+5. Deadlock (Khóa chéo / Bế tắc)
++) Khái niệm: Là một lỗi kinh điển trong đa luồng. Nó xảy ra khi hai (hoặc nhiều) luồng đang giữ một tài nguyên và chờ đợi tài nguyên mà luồng kia đang giữ. Kết quả là tạo ra một vòng lặp chờ đợi vĩnh viễn, chương trình bị treo cứng.
++) Ví dụ thực tế: * Luồng 1: Giữ "Tài liệu", chờ "Con dấu" (đang bị Luồng 2 giữ).
+-) Luồng 2: Giữ "Con dấu", chờ "Tài liệu" (đang bị Luồng 1 giữ).
+-) Chả ai chịu nhả đồ của mình ra trước -> Deadlock.
+
+6. Timer, TimerTask, Schedule (Hẹn giờ)
+=> Là bộ công cụ chuẩn của Java giúp lên lịch chạy các tác vụ nền mà không cần phải tự tạo Thread và dùng sleep() thủ công.
++) Timer: Là một chiếc đồng hồ báo thức (nó tự quản lý một luồng nền bên dưới).
++) TimerTask: Là nhiệm vụ muốn thực thi (nó thực chất là một Runnable).
++) Schedule(...): Lệnh cài đặt thời điểm chạy và độ trễ (delay) giữa các lần lặp.

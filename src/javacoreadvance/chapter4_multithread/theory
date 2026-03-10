@@ -1,0 +1,40 @@
+1. Khái niệm MultiThread (Đa luồng)
++) Nhắc lại: Một Thread giống như một người công nhân.
++) MultiThread: Là việc quản lý một "nhà máy" có hàng chục, hàng trăm công nhân chạy song song (đồng thời) với nhau, chia sẻ chung một không gian làm việc (bộ nhớ RAM).
++) Vấn đề cốt lõi của MultiThread: 1 luồng thì mượt. Nhưng khi 100 luồng cùng chạy để lấy tài nguyên, hoặc tranh nhau đi qua 1 cái cửa hẹp, nếu không điều phối tốt, hệ thống sẽ xảy ra "tai nạn" (chạy sai số liệu, treo máy, Deadlock).
+
+2. Queue (Hàng đợi) - Cầu nối an toàn giữa các luồng
+=> Khi nhiều luồng cần truyền dữ liệu cho nhau (Ví dụ: Luồng A tải ảnh từ mạng về -> Truyền cho Luồng B để lưu xuống ổ cứng), nếu truyền trực tiếp sẽ rất dễ bị xung đột, nên dùng Queue (Hàng đợi) đứng ở giữa làm vùng đệm.
+A. Khái niệm & Cơ chế:
++) Hoạt động theo nguyên tắc FIFO (First In, First Out) - Vào trước ra trước. Giống hệt như xếp hàng mua trà sữa.
++) Các loại Queue cơ bản:
+  -) LinkedList, PriorityQueue: Dùng cho ứng dụng đơn luồng. Nếu 2 luồng cùng nhét data vào 1 lúc, nó sẽ bị lỗi (Not Thread-safe).
+  -) Vũ khí tối thượng của MultiThread: BlockingQueue (Hàng đợi khóa chặn)
+    *) ArrayBlockingQueue (Có giới hạn kích thước), LinkedBlockingQueue (Không giới hạn).
+    *) Nếu Queue đầy, Producer sẽ tự động bị "gây mê" đứng chờ. Nếu Queue rỗng, Consumer sẽ tự động đứng chờ. Không bao giờ bị lỗi văng chương trình.
+
+3. Deadlock: Xảy ra khi có từ 2 luồng trở lên, mỗi luồng giữ 1 khóa và cả 2 đều đợi luồng còn lại nhả khoá của nó ra => Chương trình đứng im vĩnh viễn, không chạy nữa
+
+4. Thread Pool
++) Thay vì có task mới tạo luồng mới (rất tốn tài nguyên và thời gian của CPU), tạo sẵn x luồng chờ sẵn trong "pool", có bao nhiêu task ở hàng đợi, x luồng sẽ lần lượt xử lý rồi quay về nhận task tiếp theo cho đến hết task
++) Ưu điểm: Tái sử dụng luồng (đỡ phí tạo mới/hủy), kiểm soát số lượng luồng tối đa hoạt động đồng thời (tránh tràn bộ nhớ)
++) Nhược điểm: Cần cẩn thận khi cấu hình để tránh hệ thống xử lý chậm (quá ít luồng) và tốn Ram (thừa luồng)
+
+5. Đồng bộ (Synchronous) và Bất đồng bộ (Asynchronous)
++) Đồng bộ là "xếp hàng" chạy tuần tự, xong 1 hàm/dòng mới tiếp tục chạy hàm/dòng tiếp theo
++) Bất đồng bộ là gọi 1 hàm nhưng nó sẽ chạy ngầm ở 1 luồng khác, chương trình chính chạy hàm khác không cần chờ, khi nào hàm chạy ngầm chạy xong sẽ báo lại (callback) hoặc tự kiểm tra sau
+=> MultiThread chính là tool để xử lí bất đồng bộ
+
+6) Làm thế nào để đồng bộ khi nhiều thread cùng sử dụng 1 tài nguyên?
+=> Để đồng bộ (ngăn các thread tranh giành và dẫm chân lên nhau), Java cung cấp 4 loại tool:
++) Dùng từ khóa synchronized (Khóa ngầm định): Gắn nó vào hàm hoặc một khối code. Code đơn giản, nhưng hơi cứng nhắc (thread đến sau bắt buộc phải đứng chờ).
++) Dùng Lock và ReentrantLock (Khóa chủ động): Cho phép bạn linh hoạt hơn, ví dụ dùng hàm tryLock() (đến nơi tự vặn cửa, thấy khóa thì bỏ đi làm việc khác chứ không thèm đứng chờ).
++) Dùng các class Atomic (Chống tranh chấp không cần khóa): Với các phép toán đơn giản như cộng trừ biến đếm, Java có package java.util.concurrent.atomic chứa các class như AtomicInteger dùng thuật toán cấp thấp của CPU để cộng số mà không luồng nào đè được luồng nào. Ví dụ: AtomicInteger count = new AtomicInteger(0); count.incrementAndGet();
++) Dùng các Collection "Thread-safe" (Cấu trúc dữ liệu an toàn cho đa luồng): Thay vì dùng ArrayList hay HashMap bình thường (rất dễ lỗi khi đa luồng), dùng ConcurrentHashMap, CopyOnWriteArrayList, hoặc BlockingQueue (như bài Queue hôm trước) đã được bọc sẵn bên trong rồi.
+
+7) Các vấn đề cần xử lý khi chương trình có nhiều thread? Cách xử lý?
++) Race condition (Tranh chấp tài nguyên): 2 luồng cùng đọc biến tien = 100, cùng trừ đi 100, kết quả cập nhật về 0 thay vì báo lỗi thiếu 100 => Dùng synchrnozied, lock hoặc atomic ...
++) Deadlock (Khóa chéo/Bế tắc): Luồng A giữ khóa 1 chờ khóa 2, luồng B giữ khóa 2 chờ khóa 1, cả 2 đều treo, không báo lỗi => Quy định thứ tự khóa (bắt buộc 1 luồng phải xin khóa của luồng còn lại trước)
++) Thread Starvation (Thiếu tài nguyên): 1 luồng được priority quá cáo hoặc được khóa liên tục, dẫn đến luồng còn lại chờ k đến lượt chạy => Fairness trong ReetrantLock, khai báo Lock lock = new ReentrantLock(true); luồng nào xếp hàng trước được vào trước
++) Memory Visibility (Che khuất bộ nhớ Cache CPU): 1 luồng thay đổi trên RAM nhưng 1 luồng đang đọc từ cache của lõi CPU khác nên chạy giá trị chưa đổi => Thêm từ khóa "volatile" trước lúc khai báo biến (private volatile boolen isRunning) => Ép các luồng khi đọc/ghi biến cần thao tác trên RAM chính chứ không dùng Cache CPU
+
