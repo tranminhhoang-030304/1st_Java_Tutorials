@@ -1,0 +1,22 @@
+package javacoreadvance.chapter5_logger;
+
+import org.log4j2.Logger;
+import org.log4j2.LoggerFactory;
+
+public class Log4j2Demo {
+    private static final Logger logger = LoggerFactory.getLogger(LogbackDemo.class); // Gọi SLF4J. Mọi cấu hình ghi file nó sẽ tự động lôi từ logback.xml ra xài
+    public static void main(String[] args) {
+        System.out.println(" Demo SLF4J + LOGBACK ");
+        logger.trace("Đang chạy vào hàm main..."); // 1. Trace và Debug (Dành cho Dev lúc tìm lỗi, lên Production thường tắt đi cho đỡ rác) // Mức độ thấp nhất
+        logger.debug("Giá trị của biến a = 10; b = 20");
+        logger.info("Cristiano Ronaldo vừa đăng nhập thành công!"); // 2. Info (Log thông tin luồng nghiệp vụ bình thường)
+        logger.warn("Cảnh báo: API gọi sang Cam chậm 36 giây!"); // 3. Warn (Cảnh báo: Lỗi nhẹ, hệ thống vẫn chạy được)
+        try { // 4. Error (Lỗi nghiêm trọng: Văng Exception, sập hàm)
+            String data = null;
+            System.out.println(data.length());
+        } catch (Exception e) {
+            logger.error("Hệ thống đã bị sập!", e); // SLF4J hỗ trợ truyền thẳng Exception vào cuối rất mượt
+        }
+        System.out.println("Kết thúc Demo!");
+    }
+}

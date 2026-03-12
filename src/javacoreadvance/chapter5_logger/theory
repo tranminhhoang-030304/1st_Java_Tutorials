@@ -1,0 +1,16 @@
+1. Mục đích và vai trò của Logging?
++) Ứng dụng của bạn giống như một chuyến bay. Khi mọi thứ bình thường thì bình thường. Nhưng khi gặp sự cố, thứ giúp điều tra viên biết được chuyện gì đã xảy ra trước khi sự cố chính là Hộp đen.
+=> Log chính là "Hộp đen" của phần mềm.
++) Tại sao không dùng System.out.println() cho nhanh mà phải dùng Logger?
+=> Khi đưa app lên Server thật (Production), System.out bộc lộ vô số điểm yếu chí mạng:
++) Không phân loại được mức độ nghiêm trọng: System.out in ra mọi thứ giống hệt nhau. Logger cho phép phân loại: Đây chỉ là thông tin (INFO), đây là lỗi nhẹ (WARN), đây là lỗi sập server (ERROR).
++) Không bật/tắt được: Không thể tắt lệnh System.out trừ khi vào xóa code. Với Logger, Chỉ cần đổi 1 dòng cấu hình, hệ thống sẽ tự động giấu đi các log lặt vặt (như DEBUG) và chỉ in ra ERROR để đỡ rác màn hình.
++) Hiệu năng kém: System.out là xử lý đồng bộ, ghi ra màn hình rất chậm, làm lag app. Các thư viện Log xịn sẽ ghi bất đồng bộ (MultiThread) siêu nhanh.
++) Không lưu trữ chuyên nghiệp: System.out trôi tuột đi mất khi tắt cửa sổ lệnh. Logger giúp tự động lưu vào file .txt, tự động cắt file theo ngày (ví dụ: log-12-03-2026.txt), đầy ổ cứng thì tự xóa file cũ.
+
+2. Các thư viện hỗ trợ Log nổi tiếng trong Java
+Thế giới Java có rất nhiều thư viện sinh ra chỉ để làm nhiệm vụ ghi log:
++) java.util.logging (JUL): Hàng "cây nhà lá vườn" có sẵn của Java. Dùng tạm ổn cho app nhỏ, không cần cài thêm thư viện.
++) Log4j2: Thư viện bên thứ 3 cực kỳ nổi tiếng, tốc độ siêu bàn thờ, cấu hình mạnh mẽ (Từng có vụ hổng bảo mật lịch sử Log4Shell chấn động thế giới năm 2021 làm từ thư viện đời đầu Log4j của nó).
++) Logback: Đứa con cưng của các hệ thống hiện đại, nhanh, an toàn. (Được dùng làm mặc định trong framework Spring Boot).
++) SLF4J (Simple Logging Facade for Java): Nó KHÔNG PHẢI là thư viện ghi log, nó là một "Giao diện chuẩn" (Interface). Người ta thường viết code log theo chuẩn của SLF4J, sau đó cắm Logback hoặc Log4j2 vào làm lõi xử lý bên dưới.

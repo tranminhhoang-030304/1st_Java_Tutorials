@@ -32,4 +32,5 @@ bin/
 # Bỏ qua các file cấu hình chứa thông tin mật
 **/config.properties
 **/database.properties
+**/config6d.properties
 *.env
