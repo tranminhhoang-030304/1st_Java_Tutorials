@@ -27,11 +27,11 @@ public class MachineA_Client {
             socket.connect(new InetSocketAddress(ip,port), connTimeout);
             socket.setSoTimeout(rwTimeout);
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            while (true) {
+            while (true) { // Tạo chuỗi ngẫu nhiên
                 String randomString = "Data-" + UUID.randomUUID().toString().substring(0, 8);
                 out.println(randomString);
                 logger.info("Đã gửi: {}", randomString);
-                Thread.sleep(1000);
+                Thread.sleep(1000); // Nghỉ 1s rồi gửi tiếp
             }
         } catch (Exception e) {
             logger.error("Lỗi truyền data trên máy A! (Mạng hoặc cáp quang!)", e);
