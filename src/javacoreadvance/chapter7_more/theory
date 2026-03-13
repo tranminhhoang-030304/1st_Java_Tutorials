@@ -1,0 +1,23 @@
+1. RUP
++) RUP (Rational Unified Process) là một quy trình kinh điển do IBM thiết kế.
++) Đặc điểm: chia dự án thành các vòng lặp (Iterative) và tăng dần (Incremental). Nếu dự án quá lớn, người ta chia nhỏ ra làm nhiều phần, mỗi phần đều trải qua 4 giai đoạn
+    -) Inception (Khởi tạo): Xác định mục tiêu, phạm vi dự án, dự toán chi phí và rủi ro. (Sản phẩm: Tài liệu yêu cầu sơ bộ).
+    -) Elaboration (Phân tích/Định hình): Đi sâu vào chi tiết yêu cầu, thiết kế kiến trúc khung của hệ thống (Architecture). Đây là pha quan trọng nhất để loại bỏ rủi ro kỹ thuật.
+    -) Construction (Xây dựng): Bắt tay vào viết code và test từng chức năng (Đây là lúc Dev làm việc vất vả nhất).
+    -) Transition (Chuyển giao): Đưa sản phẩm cho khách hàng dùng thử (Beta test), sửa lỗi cuối cùng, huấn luyện người dùng và triển khai thực tế.
+
+2. UML (Unified Modeling Language - Ngôn ngữ mô hình hóa thống nhất)
++) Use Case Diagram (Sơ đồ ca sử dụng): Vẽ ra những hình người và các chức năng để nhìn tổng quan hệ thống làm được gì
++) Class Diagram (Sơ đồ lớp): Vẽ ra các ô vuông chứa Tên Class, Thuộc tính (Biến) và Phương thức (Hàm). Các đường nối thể hiện sự Kế thừa, Implement Interface hay Chứa đựng nhau
++) Sequence Diagram (Sơ đồ trình tự): Vẽ ra thứ tự các bước theo thời gian (VD: (1) User bấm nút -> (2) Giao diện gọi hàm API gửi lên Controller -> (3) Controller gọi xuống Service tính toán -> (4) Service gọi Database -> (5) Trả kết quả ngược lại.)
++) Activity Diagram (Sơ đồ hoạt động): Vẽ logic các nhánh IF/ELSE của một chức năng.
+
+3. Web Service
++) Cho phép các phần mềm giao tiếp với nhau qua môi trường Internet (cụ thể là giao thức HTTP), thông qua định dạng dữ liệu chuẩn mực
++) Có 2 trường phái Web Service chính:
+    -) SOAP (Đời cũ): * Dùng định dạng XML để truyền dữ liệu
+        .) Rất chặt chẽ, an toàn cao, nhưng file nặng và khá phức tạp.
+        .) Thường thấy ở các hệ thống Ngân hàng, Viễn thông cũ.
+    -) RESTful Web Service (Hay gọi là REST API - Đời mới)
+        .) Chủ yếu dùng định dạng JSON (Nhẹ, dễ đọc, như là thư viện gson.jar,...)
+        .) Dựa trên các hành động chuẩn của web, CRUD, ...: GET (Lấy dữ liệu), POST (Tạo mới), PUT (Cập nhật), DELETE (Xóa)

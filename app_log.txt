@@ -1,0 +1,9 @@
+thg 3 12, 2026 2:53:33 CH javacoreadvance.chapter5_logger.LoggerDemo main
+INFO: Hệ thống khởi động thành công lúc 14h36
+thg 3 12, 2026 2:53:33 CH javacoreadvance.chapter5_logger.LoggerDemo main
+WARNING: Ổ cứng sắp đầy, chỉ còn 500MB!
+thg 3 12, 2026 2:53:33 CH javacoreadvance.chapter5_logger.LoggerDemo main
+SEVERE: Lỗi toán học xảy ra!
+java.lang.ArithmeticException: / by zero
+	at javacoreadvance.chapter5_logger.LoggerDemo.main(LoggerDemo.java:17)
+

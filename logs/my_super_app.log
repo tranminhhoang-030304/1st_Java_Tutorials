@@ -1,0 +1,30 @@
+2026-03-12 15:59:23 [main] DEBUG j.chapter5_logger.LogbackDemo - Giá trị của biến a = 10; b = 20
+2026-03-12 15:59:23 [main] INFO  j.chapter5_logger.LogbackDemo - Cristiano Ronaldo vừa đăng nhập thành công!
+2026-03-12 15:59:23 [main] WARN  j.chapter5_logger.LogbackDemo - Cảnh báo: API gọi sang Cam chậm 36 giây!
+2026-03-12 15:59:23 [main] ERROR j.chapter5_logger.LogbackDemo - Hệ thống đã bị sập!
+java.lang.NullPointerException: Cannot invoke "String.length()" because "data" is null
+	at javacoreadvance.chapter5_logger.LogbackDemo.main(LogbackDemo.java:16)
+2026-03-12 17:54:03 [main] INFO  j.c.d.MachineB_Server_Receiveandprint - Máy B đang chờ kết nối tại port 9999...
+2026-03-12 17:55:03 [main] INFO  j.c.d.MachineB_Server_Receiveandprint - Máy B đang chờ kết nối tại port 9999...
+2026-03-12 17:57:45 [main] INFO  j.c.d.MachineB_Server_Receiveandprint - Máy B đang chờ kết nối tại port 9999...
+2026-03-12 17:57:50 [main] INFO  j.c.d_network_task.MachineA_Client - Đang kết nối tới máy B (127.0.0.1 : 9999)...
+2026-03-12 17:57:50 [main] INFO  j.c.d.MachineB_Server_Receiveandprint - Máy A đã kết nối: /127.0.0.1
+2026-03-12 17:57:50 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-98cc1ba0
+2026-03-12 17:57:51 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-7e453c2a
+2026-03-12 17:57:52 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-2cb5bbda
+2026-03-12 17:57:53 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-20f870a3
+2026-03-12 17:57:54 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-c5d6cb3d
+2026-03-12 17:57:55 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-bf2c8a4b
+2026-03-12 17:57:56 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-ffea6ce7
+2026-03-12 17:57:57 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-715c5daf
+2026-03-12 17:57:58 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-8d420fec
+2026-03-12 17:57:59 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-4ea7c689
+2026-03-12 17:58:00 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-02ad41ed
+2026-03-12 17:58:01 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-2c6bf871
+2026-03-12 17:58:02 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-fe71d5e4
+2026-03-12 17:58:03 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-1a6c2e38
+2026-03-12 17:58:04 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-db540594
+2026-03-12 17:58:05 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-d9d8f23c
+2026-03-12 17:58:06 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-48d2530b
+2026-03-12 17:58:07 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-383e7c24
+2026-03-12 17:58:08 [main] INFO  j.c.d_network_task.MachineA_Client - Đã gửi: Data-12552646

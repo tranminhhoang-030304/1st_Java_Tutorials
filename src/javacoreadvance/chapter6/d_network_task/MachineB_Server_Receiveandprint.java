@@ -14,11 +14,11 @@ public class MachineB_Server_Receiveandprint {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             logger.info("Máy B đang chờ kết nối tại port {}...", port);
             Socket clientSocket = serverSocket.accept();
-            clientSocket.setSoTimeout(3000);
+            clientSocket.setSoTimeout(3000); // Đặt thời gian timeout nhận dữ liệu (nếu 3s không thấy ai gửi gì sẽ văng lỗi)
             logger.info("Máy A đã kết nối: {}", clientSocket.getInetAddress());
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String message;
-            while ((message = in.readLine()) != null){
+            while ((message = in.readLine()) != null){  // Liên tục đọc dữ liệu
                 System.out.println("[Máy B nhận được tín hiệu]: " + message);
             }
         } catch (Exception e) {
